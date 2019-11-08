@@ -12,10 +12,9 @@ import binary_tree as bt
 import random as rdm
 
 
-
-
 # Testing none input
 class TestNoneInput(unittest.TestCase):
+
     def test_none_node(self):
         self.assertRaises(ValueError, lambda: bt.Node(None, None))
         tree = bt.Node(7, None)
@@ -56,8 +55,10 @@ class TestIncorrectInput(unittest.TestCase):
         self.assertRaises(ValueError, lambda: bt.search(float(420.69), 5))
         self.assertRaises(ValueError, lambda: bt.search([], 5))
 
+
 # Test correct input
 class TestCorrectInput(unittest.TestCase):
+
     def test_correct_insert(self):
         for i in range(1000):
             root = None

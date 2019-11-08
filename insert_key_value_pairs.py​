@@ -1,0 +1,77 @@
+import sys
+import argparse
+import time
+import binary_tree as bt
+sys.path.insert(1, '/Users/Acer/Documents/'
+                   'Python/trees-anle6372/hash-tables-anle6372')
+import hash_tables as ht
+import hash_functions as hf
+sys.path.insert(1, '/Users/Acer/Documents/Python/trees-anle6372/avl_tree')
+import avl
+
+# Argparse Defns
+parser = argparse.ArgumentParser(
+    description='testing framework for data structures')
+
+parser.add_argument('--data_struc', type=str,
+                    help='type of data structure to use', required=True)
+
+parser.add_argument(
+    '--data', type=str,
+    help='The dataset to be used', required=True)
+
+parser.add_argument(
+    '--entries', type=str,
+    help='How many data entries are to be used', required=True)
+
+args = parser.parse_args()
+
+# Assign Subset params
+entries = int(args.entries)
+# Reading Data
+data = []
+for l in open(args.data):
+    data.append(eval(l.rstrip()))
+t0 = time.time()
+
+if args.data_struc == 'binary':
+    root = None
+    for i in range(len(data)):
+        root = bt.insert(root, int(data[i][0]), int(data[i][0]))
+    t1 = time.time()
+    for i in range(entries):
+        bt.search(root, data[i][0])
+    t2 = time.time()
+    for i in range(entries):
+        bt.search(root, data[i][0] + 0.5)
+    t3 = time.time()
+if args.data_struc == 'avl':
+    root = avl.AVL()
+    for i in range(len(data)):
+        root.insert(data[i][0])
+    t1 = time.time()
+    for i in range(entries):
+        root.find(data[i][0])
+    t2 = time.time()
+    for i in range(entries):
+        root.find(data[i][0] + 0.5)
+    t3 = time.time()
+if args.data_struc == 'hash':
+    table = ht.LinearProbe(100000, hf.h_rolling)
+    for i in range(len(data)):
+        table.add(str(data[i][0]), data[i][1])
+    t1 = time.time()
+    for i in range(entries):
+        table.search(str(data[i][0]))
+    t2 = time.time()
+    for i in range(entries):
+        table.search(str(data[i][0] + 0.5))
+    t3 = time.time()
+
+insert_time = t1-t0
+search_time = t2-t1
+non_search_time = t3 - t2
+
+print('Insert time is ' + str(insert_time))
+print('Search time is ' + str(search_time))
+print('Search time for nonexistant keys is ' + str(non_search_time))

@@ -13,3 +13,7 @@ before_install:
     - conda install --yes python=3.6
 
 script:
+pycosestyle test_binary_tree.py
+pycodestyle binary_tree.py
+bash unittest.sh
+python test_binary_tree.py
