@@ -1,11 +1,14 @@
 """
-Library of classes that creates binary tree data structures without rebalancing strategies
+Library of classes that creates binary
+tree data structures without rebalancing strategies
 class Node (self, key, value=None, left=None, right=None):
     Parameters
     ----------
-    key: (required) type integer or float that represents the navigable index corresponding to that node
+    key: (required) type integer or float that
+    represents the navigable index corresponding to that node
     value: (optional) data to be stored in Node
-    left: (optional) child instance of Node with key less than or equal to parent key
+    left: (optional) child instance of
+    Node with key less than or equal to parent key
     right: (optional) child instance of Node with key greater than parent key
 
     Functions
@@ -43,6 +46,7 @@ class Node:
         self.left = left
         self.right = right
 
+
 def height(node):
     if node is None:
         return 0
@@ -58,23 +62,24 @@ def height(node):
 def insert(root, key, value=None):
     if key is None:
         raise ValueError('Inserted node must have key attribute')
-    if root == None:
+    if root is None:
         root = Node(key, value=value)
         return root
     else:
         if type(root) is not Node:
             raise ValueError('Root must be a Node object')
         if key < root.key:
-            if root.left == None:
+            if root.left is None:
                 root.left = Node(key, value=value)
             else:
                 insert(root.left, key, value=value)
         else:
-            if root.right == None:
+            if root.right is None:
                 root.right = Node(key, value=value)
             else:
                 insert(root.right, key, value=value)
         return root
+
 
 def search(node, key):
     if key is None:
@@ -84,6 +89,12 @@ def search(node, key):
     if node.key == key:
         return node.value
     if key > node.key:
-        return search(node.right, key)
+        try:
+            return search(node.right, key)
+        except ValueError:
+            return False
     else:
-        return search(node.left, key)
+        try:
+            return search(node.left, key)
+        except ValueError:
+            return False
