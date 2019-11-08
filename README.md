@@ -40,4 +40,4 @@
     - Hash Table yielded:
         + Add time of 0.040 seconds
         + Search time for real keys of 0.0026 seconds
-        + Search time for nonreal keys of 0.0036 seconds
+        + Search time for nonreal keys of 0.0036 seconds.
