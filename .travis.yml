@@ -15,5 +15,3 @@ before_install:
 script:
 - pycodestyle test_binary_tree.py
 - pycodestyle binary_tree.py
-- bash unittests.sh
-- python test_binary_tree.py
